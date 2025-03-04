@@ -34,11 +34,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "github",
-            "url": "git@github.com:Involve-Digital/laravel-migrator.git"
-        }
-    ]
+    "prefer-stable": true
 }
