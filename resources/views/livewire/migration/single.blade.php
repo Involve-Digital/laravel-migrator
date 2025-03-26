@@ -1,4 +1,4 @@
-<tr x-data="{ DeleteModal: false, RollbackModal: false, StructureModal: false }">
+<tr x-data="{ RollbackModal: false, StructureModal: false }">
     @php
         $migrationData = DB::table(config('migrator.migrations_table'))->where('migration', str_replace('.php', '', $migrationFile));
         $exists = $migrationData->exists();
@@ -34,8 +34,6 @@
         @if(!$exists)
             <a class="text-indigo-600 hover:text-indigo-800 cursor-pointer" wire:click.prevent="migrate">Migrate</a>
         @endif
-
-        <a @click="DeleteModal = true" class="text-red-600 hover:text-red-800 cursor-pointer">Delete</a>
 
         @if($exists)
             <a class="text-green-600 hover:text-green-800 cursor-pointer" @click="RollbackModal = true">Rollback</a>
