@@ -9,6 +9,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Symfony\Component\Finder\SplFileInfo;
+use Illuminate\Database\Migrations\Migration;
 
 /**
  * Class MigratorParser.
@@ -122,11 +123,19 @@ class MigratorParser
         try {
             $migrator = app('migrator');
 
-            $filesystem = resolve(Filesystem::class);
+            $migrationObject = include $migration;
 
-            $filePath = $filesystem->path($migration);
-            require_once $filePath;
-            
+            if (is_int($migrationObject)) {
+                $declaredClasses = get_declared_classes();
+
+                foreach ($declaredClasses as $class) {
+                    if (is_subclass_of($class, Migration::class)) {
+                        $migrationObject = new $class;
+                        break;
+                    }
+                }
+            }
+
             $db = $migrator->resolveConnection(
                 $migrationObject->getConnection()
             );
