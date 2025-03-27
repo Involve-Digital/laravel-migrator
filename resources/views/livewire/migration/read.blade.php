@@ -29,8 +29,10 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($migrations as $key => $migration)
-
-                                @livewire('migrator::livewire.migration.single', ['migration' => $migration, 'isLast' => $loop->last], key($key))
+                                @php
+                                    $allowRollback = ($key + 1) === $migrations->total();
+                                @endphp
+                                @livewire('migrator::livewire.migration.single', ['migration' => $migration, 'isLast' => $allowRollback], key($key))
                                 @empty
                                     <tr>
                                         <td colspan="5" class="px-6 py-4 text-center">
