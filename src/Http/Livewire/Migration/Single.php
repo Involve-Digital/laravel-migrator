@@ -57,10 +57,15 @@ class Single extends Component
     public $previewQueries;
 
     /**
+     * @var bool Is the last migration in list
+     */
+    public $isLast;
+
+    /**
      * Component mount.
      * @param SplFileInfo $migration
      */
-    public function mount(SplFileInfo $migration)
+    public function mount(SplFileInfo $migration, bool $isLast)
     {
         $this->migrationPath = $migration->getPathname();
         $this->migrationFile = $migration->getFilename();
@@ -73,6 +78,7 @@ class Single extends Component
             ->first(['batch'])->batch ?? 0;
         $this->structure = $migratorParser->getStructure();
         $this->previewQueries = $migratorParser->getPreview($migration->getPathname());
+        $this->isLast = $isLast;
     }
 
     /**

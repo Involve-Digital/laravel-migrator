@@ -35,7 +35,7 @@
             <a class="text-indigo-600 hover:text-indigo-800 cursor-pointer" wire:click.prevent="migrate">Migrate</a>
         @endif
 
-        @if($exists)
+        @if($exists && $isLast)
             <a class="text-green-600 hover:text-green-800 cursor-pointer" @click="RollbackModal = true">Rollback</a>
         @else
             <a class="text-green-600 hover:text-green-800 cursor-pointer" style="pointer-events: none; cursor: default;text-decoration: line-through;">Rollback</a>
