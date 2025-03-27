@@ -139,9 +139,11 @@
                                 <p class="text-sm text-gray-500">
                                     Are you sure to migrate the migrations?
                                 </p>
-                                <div class="mt-2">
-                                    <span class="text-xs text-red-600 mt-4">Note: Safe migrate will fresh the database then re-run migrations!</span>
-                                </div>
+                                @if(App::environment('local'))
+                                    <div class="mt-2">
+                                        <span class="text-xs text-red-600 mt-4">Note: Safe migrate will fresh the database then re-run migrations!</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
