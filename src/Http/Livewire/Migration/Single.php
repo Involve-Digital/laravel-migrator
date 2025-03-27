@@ -88,7 +88,8 @@ class Single extends Component
     {
         try {
             \Artisan::call('migrate', [
-                '--path' => $this->getPath()
+                '--path' => $this->getPath(),
+                '--force' => true
             ]);
 
             $message = 'Migration was migrated.';
@@ -166,6 +167,7 @@ class Single extends Component
         try {
             \Artisan::call('migrate:rollback', [
                 '--path' => $this->getPath(),
+                '--force' => true
             ]);
 
             $message = 'Migration was rolled back.';
