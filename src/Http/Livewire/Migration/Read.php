@@ -181,7 +181,7 @@ class Read extends Component
         if (!empty($this->search)){
             return collect($migrations)->filter(function ($migration) {
                 $migratorParser = resolve(MigratorParser::class , ['migration' => $migration]);
-                if (Str::contains($migratorParser->getName(),$this->search) ){
+                if (Str::contains(strtolower($migratorParser->getName()), strtolower($this->search)) ){
                     return $migration;
                 }
             })->toArray();
